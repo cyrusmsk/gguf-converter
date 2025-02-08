@@ -1,0 +1,11 @@
+{
+	"authors": [
+		"Sergei Giniatulin"
+	],
+	"lflags": ["-L/opt/homebrew/opt/sentencepiece/lib/", "-L-lstdc++"],
+    "libs": ["sentencepiece"],
+	"copyright": "Copyright © 2025, Sergei Giniatulin",
+	"description": "Simple sentencepiece interface",
+	"license": "proprietary",
+	"name": "d_example"
+}
