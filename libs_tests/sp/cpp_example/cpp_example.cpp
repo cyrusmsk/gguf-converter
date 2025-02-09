@@ -8,6 +8,6 @@ int main() {
        std::cerr << status.ToString() << std::endl;
        // error
     }
-    std::cout << "Model loaded succesffully" << std::endl;
+    std::cout << "Model loaded successfully" << std::endl;
     return 0;
 }

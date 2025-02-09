@@ -2,10 +2,22 @@
 	"authors": [
 		"Sergei Giniatulin"
 	],
-	"dflags": ["-betterC", "-mcpu=native", "-L-lstdc++", "-L-lsentencepiece"],
-    "lflags": ["-L/usr/local/lib", "-rpath", "/usr/local/lib"],
 	"copyright": "Copyright © 2025, Sergei Giniatulin",
+	"dependencies": {
+		"bc-string": "~>1.4.0",
+		"dvector": "~>0.0.5"
+	},
 	"description": "Simple sentencepiece interface",
+	"dflags": [
+		"-mcpu=native",
+		"-L-lstdc++",
+		"-L-lsentencepiece"
+	],
+	"lflags": [
+		"-L/usr/local/lib",
+		"-rpath",
+		"/usr/local/lib"
+	],
 	"license": "proprietary",
 	"name": "sentencepiece_example"
 }
