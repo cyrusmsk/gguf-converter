@@ -3,59 +3,65 @@ module app;
 import core.stdcpp.string_view : string_view;
 import core.stdcpp.memory : unique_ptr;
 import core.stdcpp.utility : pair;
-import bc.string : RCString, DString;
+import bc.string : RCString;
 import dvector;
-
-enum StatusCode : int
-{
-  kOk = 0,
-  kCancelled = 1,
-  kUnknown = 2,
-  kInvalidArgument = 3,
-  kDeadlineExceeded = 4,
-  kNotFound = 5,
-  kAlreadyExists = 6,
-  kPermissionDenied = 7,
-  kResourceExhausted = 8,
-  kFailedPrecondition = 9,
-  kAborted = 10,
-  kOutOfRange = 11,
-  kUnimplemented = 12,
-  kInternal = 13,
-  kUnavailable = 14,
-  kDataLoss = 15,
-  kUnauthenticated = 16,
-}
 
 extern (C++,`sentencepiece`)
 {
-  extern (C++,`util`) extern (C++,class) class Status
+  extern (C++,`util`)
   {
+    enum StatusCode : int
+    {
+      kOk = 0,
+      kCancelled = 1,
+      kUnknown = 2,
+      kInvalidArgument = 3,
+      kDeadlineExceeded = 4,
+      kNotFound = 5,
+      kAlreadyExists = 6,
+      kPermissionDenied = 7,
+      kResourceExhausted = 8,
+      kFailedPrecondition = 9,
+      kAborted = 10,
+      kOutOfRange = 11,
+      kUnimplemented = 12,
+      kInternal = 13,
+      kUnavailable = 14,
+      kDataLoss = 15,
+      kUnauthenticated = 16,
+    }
+
+    extern (C++, struct) struct Status
+    {
     public:
-      this();
+      //this();
       ~this();
       this(StatusCode code, string_view error_message);
       this(ref const Status s);
-      //bool opEquals(ref const Status s) const;
-      bool ok() const { return rep_ is null;}
+      //bool opEquals(ref Status s) const;
+      bool ok() const {return rep_ is null;};
       void set_error_message(const char* str);
       const(char*) error_message() const;
-      const(char*) message() const {return error_message();}
+      const(char*) message() const
+      {
+        return error_message();
+      }
+
       StatusCode code() const;
       string_view ToString() const;
       void IgnoreError();
     private:
-      struct Rep;
+      struct Rep {}
       Rep* rep_;
+    }
   }
+  extern (C++,struct) struct NBestSentencePieceText;
+  extern (C++,struct) struct ModelInterface;
+  extern (C++,struct) struct SentencePieceText;
+  extern (C++,struct) struct ModelProto;
+  extern (C++,struct) struct NormalizerSpec;
 
-  extern (C++,class) class NBestSentencePieceText;
-  extern (C++,class) class ModelInterface;
-  extern (C++,class) class SentencePieceText;
-  extern (C++,class) class ModelProto;
-  extern (C++,class) class NormalizerSpec;
-
-  extern (C++,`normalizer`) extern (C++,class) class Normalizer;
+  extern (C++,`normalizer`) extern (C++,struct) struct Normalizer;
 
   extern (C++,class) class SentencePieceProcessor
   {
@@ -63,7 +69,7 @@ extern (C++,`sentencepiece`)
     ~this();
     abstract Status Load(string_view filename);
     abstract void LoadOrDie(string_view filename);
-    abstract Status Load(const(ModelProto) model_proto);
+    abstract Status Load(const(ModelProto*) model_proto);
     //TODO: fix move function
     //abstract Status Load(unique_ptr!ModelProto model_proto);
     abstract Status LoadFromSerializedProto(string_view serialized);
@@ -122,7 +128,8 @@ extern (C++,`sentencepiece`)
     abstract RCString Normalize(string_view input) const;
 
     // IO related functions
-    extern(C++, `io`) {
+    extern (C++,`io`)
+    {
       Status LoadModelProto(string_view file_name, ModelProto* model_proto);
       Status SaveModelProto(string_view file_name, ref const ModelProto model_proto);
     }
@@ -163,14 +170,12 @@ void destroy(T)(ref T t)
     t = null;
 }
 
-extern (C) void main()
+void main()
 {
   import core.stdc.stdio : printf;
 
-/*
   SentencePieceProcessor proc = alloc!SentencePieceProcessor();
-  scope (exit)
-    destroy(proc);
+  scope(exit) destroy(proc);
   string_view model_path = "../data/sentencepiece.bpe.model";
   printf("Model path: %s\n", cast(char*) model_path);
 
@@ -184,9 +189,7 @@ extern (C) void main()
 
   if (!status.ok())
   {
-    //printf("Error %s/n", cast(char*) status.ToString());
-    printf("Error\n");
+    printf("Error %s/n", cast(char*) status.ToString());
   }
   printf("Model loaded successfully\n");
-  */
 }

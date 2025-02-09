@@ -1,7 +1,7 @@
 namespace test {
     enum class StatusCode: int {
-        c1 = 0,
-        c2 = 1,
+        c0 = 0,
+        c1 = 1,
     };
 
     class Status {
