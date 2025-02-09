@@ -2,10 +2,10 @@
 	"authors": [
 		"Sergei Giniatulin"
 	],
-	"lflags": ["-L/opt/homebrew/opt/sentencepiece/lib/", "-L-lstdc++"],
-    "libs": ["sentencepiece"],
+	"dflags": ["-betterC", "-mcpu=native", "-L-lstdc++", "-L-lsentencepiece"],
+    "lflags": ["-L/usr/local/lib", "-rpath", "/usr/local/lib"],
 	"copyright": "Copyright © 2025, Sergei Giniatulin",
 	"description": "Simple sentencepiece interface",
 	"license": "proprietary",
-	"name": "d_example"
+	"name": "sentencepiece_example"
 }

@@ -2,7 +2,6 @@ module app;
 
 import core.stdcpp.string_view : string_view;
 
-
 enum StatusCode : int
 {
   kOk = 0,
@@ -35,14 +34,13 @@ extern (C++,`sentencepiece`)
     const(char*) error_message() const;
     const(char*) message() const;
     StatusCode code() const;
-    //string_view ToString() const;
-    //void IgnoreError();
+    string_view ToString() const;
+    void IgnoreError();
   }
 }
 
-void main()
+extern(C) void main()
 {
-  import std.stdio : writeln;
-
-  writeln("helllo");
+    import core.stdc.stdio : printf;
+    printf("Hi\n");
 }
