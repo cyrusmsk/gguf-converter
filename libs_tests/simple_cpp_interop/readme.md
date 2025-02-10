@@ -21,6 +21,22 @@ clang++ --std=c++20 x.cpp test.cpp
 ```
 
 ## For R example
+Install `Rcpp` and run:
 ```bash
-Rscript example.R
+Rscript r_example.R
+```
+
+## For Python example
+Install `Pybind11` first.
+First build C++ code:
+```bash
+mkdir build
+cd build
+cmake ..
+make
+```
+
+Then just run Python:
+```python
+python py_example.py
 ```
