@@ -1,5 +1,7 @@
 #include <sentencepiece_processor.h>
 #include <iostream>
+#include <vector>
+#include <string>
 
 int main() {
     sentencepiece::SentencePieceProcessor processor;
@@ -9,5 +11,9 @@ int main() {
        // error
     }
     std::cout << "Model loaded successfully" << std::endl;
+    std::vector<std::string> pieces;
+    processor.Encode("This is a test.", &pieces);
+    for (const std::string &token : pieces)
+        std::cout << token << std::endl;
     return 0;
 }

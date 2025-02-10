@@ -1,0 +1,14 @@
+{
+	"authors": [
+		"Sergei Giniatulin"
+	],
+	"copyright": "Copyright © 2025, Sergei Giniatulin",
+	"sourceFiles": ["test.o", "test2.o"],
+	"dflags": [
+		"-mcpu=native",
+		"-L-lstdc++"
+	],
+	"description": "C++ interop example (with string_view and vector)",
+	"license": "proprietary",
+	"name": "d_example"
+}

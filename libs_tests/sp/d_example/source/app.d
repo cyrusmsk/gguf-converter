@@ -84,7 +84,7 @@ extern (C++,`sentencepiece`)
     abstract Status LoadVocabulary(string_view file_name, int threshold);
 
     // Simple Econde and Decode API
-    abstract Status Encode(string_view input, Dvector!RCString* pieces) const;
+    abstract Status Encode(string_view input, out Dvector!RCString pieces) const;
     abstract Status Encode(string_view input, Dvector!int* ids) const;
     abstract Status Decode(const(Dvector!RCString) pieces, RCString* detokenized) const;
     abstract Status Decode(const(Dvector!string) pieces, RCString* detokenized) const;
@@ -172,24 +172,31 @@ void destroy(T)(ref T t)
 
 void main()
 {
-  import core.stdc.stdio : printf;
+  import std.stdio : writeln;
 
   SentencePieceProcessor proc = alloc!SentencePieceProcessor();
   scope(exit) destroy(proc);
   string_view model_path = "../data/sentencepiece.bpe.model";
-  printf("Model path: %s\n", cast(char*) model_path);
+  writeln("Model path: ", model_path);
 
   if (proc is null)
   {
-    printf("NULL!!\n");
+    writeln("NULL!!");
   }
 
-  printf("Before status calculated\n");
   auto status = proc.Load(model_path);
-
   if (!status.ok())
   {
-    printf("Error %s/n", cast(char*) status.ToString());
+    writeln("Error ", status.ToString());
   }
-  printf("Model loaded successfully\n");
+  writeln("Model loaded successfully");
+
+  Dvector!RCString pieces;
+  //proc.Encode(string_view("This is a test."), pieces).IgnoreError();
+  void f(ref Dvector!RCString sp) {
+    sp ~= RCString("qq");
+  }
+  f(pieces);
+  writeln(pieces);
+  writeln("End");
 }

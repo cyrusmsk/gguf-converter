@@ -1,0 +1,7 @@
+{
+	"fileVersion": 1,
+	"versions": {
+		"bc-string": "1.4.0",
+		"dvector": "0.0.5"
+	}
+}
