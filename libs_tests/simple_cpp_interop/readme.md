@@ -19,3 +19,8 @@ dub build
 ```bash
 clang++ --std=c++20 x.cpp test.cpp
 ```
+
+## For R example
+```bash
+Rscript example.R
+```
