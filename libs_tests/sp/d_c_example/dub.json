@@ -1,0 +1,15 @@
+{
+	"authors": [
+		"Sergei Giniatulin"
+	],
+	"copyright": "Copyright © 2025, Sergei Giniatulin",
+	"description": "Simple sentencepiece interface",
+	"sourceFiles": ["sentencepiece_api.c"],
+	"dflags": [
+		"-mcpu=native",
+		"./c_api/sentencepiece_api.c",
+		"-I./c_api"
+	],
+	"license": "proprietary",
+	"name": "sentencepiece_example"
+}
