@@ -4,11 +4,17 @@
 	],
 	"copyright": "Copyright © 2025, Sergei Giniatulin",
 	"description": "Simple sentencepiece interface",
-	"sourceFiles": ["sentencepiece_api.c"],
+	"lflags": [
+		"sp_c_api.o",
+		"-L/usr/local/lib",
+		"-rpath",
+		"/usr/local/lib"
+	],
 	"dflags": [
 		"-mcpu=native",
-		"./c_api/sentencepiece_api.c",
-		"-I./c_api"
+		"-L-lsentencepiece",
+		"-L-lstdc++",
+		"sp_c_api.c"
 	],
 	"license": "proprietary",
 	"name": "sentencepiece_example"

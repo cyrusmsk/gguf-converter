@@ -75,6 +75,23 @@ unsigned char *spp_encode_as_serialized_proto(SentencePieceProcessor *spp, char 
   return data;
 }
 
+// new test
+unsigned char **spp_encode(SentencePieceProcessor *spp, char const *sentence, size_t sentence_len, size_t *len) {
+  auto sentence_view = absl::string_view(sentence, sentence_len);
+  std::vector<std::string> pieces;
+  auto serialized = spp->Encode(sentence_view, &pieces);
+
+  *len = pieces.size();
+  unsigned char** result = new unsigned char*[*len];
+
+  for (size_t i = 0; i < *len; ++i) {
+      unsigned char *data= (unsigned char *) malloc(pieces[i].size());
+      memcpy(data, pieces[i].data(), pieces[i].size());
+      result[i] = data;
+  }
+
+  return result;
+}
 
 unsigned char *spp_sample_encode_as_serialized_proto(SentencePieceProcessor *spp, char const *sentence, size_t sentence_len, size_t *len, size_t nbest, float alpha) {
   auto sentence_view = absl::string_view(sentence, sentence_len);
