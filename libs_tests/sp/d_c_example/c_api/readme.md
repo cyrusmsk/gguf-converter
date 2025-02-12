@@ -1,7 +1,7 @@
 # Build test example
 First build object file and then the main test example:
 ```bash
-clang++ sentencepiece.cpp -c
+clang++ sentencepiece.cpp -c --std=c++11
 clang++ test.cpp sentencepiece.o --std=c++11 -lsentencepiece -rpath /usr/local/lib
 ```
 

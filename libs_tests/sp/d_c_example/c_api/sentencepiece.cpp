@@ -3,6 +3,8 @@
 #include <cstring>
 #include <type_traits>
 #include <vector>
+#include <iostream>
+#include <fstream>
 
 #include <sentencepiece_processor.h>
 
@@ -79,8 +81,15 @@ unsigned char *spp_encode_as_serialized_proto(SentencePieceProcessor *spp, char 
 unsigned char **spp_encode(SentencePieceProcessor *spp, char const *sentence, size_t sentence_len, size_t *len) {
   auto sentence_view = absl::string_view(sentence, sentence_len);
   std::vector<std::string> pieces;
-  auto serialized = spp->Encode(sentence_view, &pieces);
+  auto status = spp->Encode(sentence_view, &pieces);
 
+  // debug
+  std::ofstream outFile("output.txt");
+  for(const std::string& str : pieces) {
+    outFile << str << std::endl;
+  }
+  outFile.close();
+  
   *len = pieces.size();
   unsigned char** result = new unsigned char*[*len];
 
